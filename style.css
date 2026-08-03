@@ -1,0 +1,397 @@
+/* --- Variables Identidad Arduino Moderno --- */
+:root {
+    --bg-page: #f0f4f8;         
+    --bg-card: #ffffff;         
+    --text-main: #2d3748;       
+    --text-muted: #718096;      
+    --arduino-teal: #00979C;    
+    --arduino-dark: #005f63;    
+    --border-light: #e2e8f0;    
+    --shadow-soft: 0 10px 40px rgba(0, 151, 156, 0.08); 
+    --shadow-hover: 0 15px 50px rgba(0, 151, 156, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    font-family: 'Poppins', system-ui, sans-serif;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; 
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.7;
+}
+
+/* --- Animaciones Scroll Reveal --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Barra de Créditos Superior --- */
+.top-bar {
+    background-color: #0f172a; 
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 2rem;
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 100;
+}
+
+.top-subtitle { color: #94a3b8; letter-spacing: 1px; }
+
+.top-author {
+    background-color: var(--arduino-teal);
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* --- Encabezado / Banner Hero --- */
+.hero-header {
+    position: relative;
+    width: 100%;
+    height: 45vh; 
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.9));
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 0 20px;
+    width: 100%; 
+}
+
+.hero-content h1 {
+    font-size: 3.5rem; 
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+    min-height: 80px; 
+    text-shadow: 0 4px 20px rgba(0, 151, 156, 0.8);
+    word-wrap: break-word; 
+}
+
+/* --- Paneles de Contenido (MODIFICADO A 90%) --- */
+.box-panel {
+    max-width: 90%; /* ANTES: 80% o 1000px */
+    margin: 4rem auto;
+    padding: 3rem;
+    background-color: var(--bg-card);
+    border-radius: 24px; 
+    box-shadow: var(--shadow-soft);
+}
+
+h2 {
+    color: var(--arduino-dark);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--arduino-teal);
+    border-radius: 2px;
+}
+
+.center-title { text-align: center; }
+.center-title::after { left: 50%; transform: translateX(-50%); }
+
+p { margin-bottom: 1.2rem; color: var(--text-muted); }
+p strong { color: var(--text-main); font-weight: 600; }
+
+/* --- Grid Electrónica & Componentes --- */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.info-card {
+    background-color: var(--bg-page);
+    padding: 1.8rem;
+    border-radius: 16px;
+    border-left: 4px solid var(--arduino-teal);
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover { transform: translateY(-5px); }
+
+.info-card h3 {
+    color: var(--text-main);
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.formula {
+    background-color: #ffffff;
+    color: var(--arduino-teal);
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: 1px dashed var(--arduino-teal);
+    font-weight: bold;
+    word-break: break-all; 
+    font-size: 0.9rem;
+}
+
+/* --- Sección Componentes (MODIFICADO A 90%) --- */
+.components-section {
+    max-width: 90%; /* ANTES: 1100px */
+    margin: 5rem auto;
+    padding: 0 1rem;
+}
+
+a { text-decoration: none; }
+
+/* Aviso de Tiendas Locales */
+.store-notice {
+    background-color: #ffffff;
+    border-left: 5px solid var(--arduino-teal);
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+    border-radius: 12px;
+    color: var(--text-muted);
+    box-shadow: var(--shadow-soft);
+    word-wrap: break-word;
+}
+
+.store-notice strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--text-main);
+}
+
+.highlight-store {
+    background-color: var(--arduino-teal);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 5px 4px;
+    transition: background-color 0.3s;
+}
+.highlight-store:hover { background-color: var(--arduino-dark); }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--arduino-teal);
+}
+
+.img-container {
+    width: 100%;
+    height: 200px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    padding: 25px;
+    transition: transform 0.4s ease;
+}
+.card:hover .img-container img { transform: scale(1.08); }
+
+.card-content { padding: 1.8rem; }
+.card-content h3 { color: var(--text-main); margin-bottom: 0.5rem; font-weight: 600; }
+.card-content p { font-size: 0.95rem; margin-bottom: 0; }
+
+/* --- CARRUSEL DE GALERÍA --- */
+.gallery-section { 
+    text-align: center;
+    width: 100%;
+    padding: 2rem 0; 
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-track-wrapper {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: var(--shadow-hover);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.carousel-slide img {
+	margin-left: 5%;
+	margin-right: 5%;
+	text-align: center;
+	align-content: center;
+    width: 90%;
+    height: 450px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Glassmorphism en botones del carrusel */
+.carousel-btn {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--arduino-dark);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover { 
+    background: rgba(255, 255, 255, 0.9); 
+    color: var(--arduino-teal);
+    transform: translateY(-50%) scale(1.1);
+}
+.carousel-btn.prev { left: -25px; }
+.carousel-btn.next { right: -25px; }
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    background-color: #0f172a;
+    color: #94a3b8;
+    margin-top: 5rem;
+}
+
+/* =========================================
+   MEDIA QUERIES (MÓVIL)
+   ========================================= */
+@media screen and (max-width: 768px) {
+    .hero-content h1 { 
+        font-size: 2rem; 
+        min-height: auto;
+    }
+    .hero-header { height: 35vh; }
+
+    .top-bar { 
+        flex-direction: column; 
+        gap: 10px; 
+        text-align: center; 
+        padding: 1rem;
+    }
+
+    /* Mantenemos el 95% en móvil para aprovechar al máximo el espacio pequeño */
+    .box-panel, .components-section { 
+        max-width: 95%; 
+        margin: 2rem auto; 
+        padding: 1.5rem 1rem; 
+    }
+
+    .info-grid, .grid-container {
+        grid-template-columns: 1fr; 
+    }
+
+    h2 { font-size: 1.5rem; }
+
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+    
+    .carousel-slide img { height: 250px; } 
+}

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sistema de detección y monitoreo de calidad del aire. | Juan Mejía</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="top-bar">
+        <span class="top-subtitle">Electricidad • Electrónica • Programación</span>
+        <span class="top-author">UMG Ingeniería en Sistemas | Curso: Electrónica Digital | Autor: Juan Mejía</span>
+    </div>
+
+    <header class="hero-header">
+        <img src="banner.jpg" alt="Banner del Proyecto" class="hero-bg" onerror="this.src='img/banner.jpg'">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 id="typewriter"></h1>
+        </div>
+    </header>
+
+    <main>
+        <section class="box-panel reveal">
+            <h2 style="text-align: center">Proyecto Electrónica Digital</h2>
+            <p>El presente proyecto describe el diseño e implementación de un sistema de detección y monitoreo de la calidad del aire basado en el sensor de gas MQ-2, analizado desde la perspectiva de la electrónica digital. A diferencia de los sistemas puramente analógicos, la base de este dispositivo reside en la conversión analógico-digital (ADC), el procesamiento de señales discretas y la transmisión de datos binarios mediante protocolos de comunicación.</p>
+            <p>El objetivo primordial es comprender cómo un microcontrolador muestrea y cuantifica las variaciones de voltaje generadas por la presencia de gases en el entorno (tales como dióxido de carbono y gas metano) para procesarlas como datos digitales precisos. Se hace especial énfasis en la interfaz del hardware con un software desarrollado en el entorno de Processing, diseñado para la visualización gráfica en tiempo real de los niveles de calidad del aire. Asimismo, se analiza la gestión de energía y la generación de señales digitales (como el PWM) necesarias para accionar componentes mecánicos, como servomotores, que permiten ampliar el área de muestreo del sensor.</p>
+            <!--<p><strong>Impacto Educativo:</strong> Además de funcionar como un sistema de alarma táctico, el proyecto es una demostración integral de mecatrónica. Todos los datos recopilados por el sensor son empaquetados y transmitidos en tiempo real hacia una computadora, donde un software desarrollado en Processing renderiza gráficamente el entorno y exporta los eventos a una base de datos CSV.</p>-->
+        </section>
+
+        <section class="box-panel reveal">
+    <h2>Principios de Electrónica Digital y Processing</h2>
+    <div class="info-grid">
+        <div class="info-card">
+            <h3>Captura Digital de Distancia (HC-SR04)</h3>
+            <p>El microcontrolador genera un pulso de disparo digital (TRIG) y mide la duración del pulso de retorno digital (ECHO) utilizando un temporizador. El tiempo capturado se convierte en un valor digital proporcional a la distancia para su posterior procesamiento.</p>
+            <div class="formula">D = (Tiempo µs × 0.0343) / 2</div>
+        </div>
+        <div class="info-card">
+            <h3>Procesamiento Digital de Señales (DSP) en el MCU</h3>
+            <p>El código del microcontrolador implementa un filtro de mediana para procesar las lecturas digitales de distancia. Almacena 3 muestras consecutivas en una matriz digital, las ordena y selecciona el valor central (la mediana), descartando picos de ruido y lecturas erróneas.</p>
+        </div>
+        <div class="info-card">
+            <h3>Protocolo de Comunicación UART y Processing</h3>
+            <p>Los datos de telemetría procesados se empaquetan y transmiten a la PC a través de un enlace UART asíncrono a 115200 baudios. La aplicación Processing escucha activamente el puerto serial para leer, analizar y visualizar los datos en tiempo real.</p>
+        </div>
+        <div class="info-card">
+            <h3>Control de Actuadores Digitales (LEDs)</h3>
+            <p>El microcontrolador controla el estado (ENCENDIDO/APAGADO) de cada LED en el módulo de semáforo mediante niveles lógicos digitales (ALTO/BAJO) en sus pines de salida. Los comandos de Processing pueden enviarse a través de UART para controlar los LEDs.</p>
+        </div>
+        <div class="info-card">
+            <h3>Alimentación y Estabilidad de Voltaje</h3>
+            <p>Un regulador lineal de voltaje (LDO) en la placa Arduino convierte de forma segura los 9V inestables de la batería portátil en una línea estable de 5V, fundamental para la precisión de la conversión ADC y la confiabilidad de la comunicación serial.</p>
+        </div>
+        <div class="info-card">
+            <h3>Generación de Señal PWM Digital para Escaneo</h3>
+            <p>El microcontrolador genera una señal PWM (Modulación por Ancho de Pulso) digital para controlar la posición angular del servomotor SG90. La duración del pulso digital determina el ángulo de barrido. Processing controla el ángulo deseado a través de UART.</p>
+        </div>
+        
+        <!-- Nuevas tarjetas añadidas -->
+        <div class="info-card">
+            <h3>Conversión Analógico-Digital (Sensor MQ-2)</h3>
+            <p>Las variaciones de voltaje continuo generadas por la detección de gas en el sensor MQ-2 son muestreadas por el convertidor analógico-digital (ADC) del microcontrolador. Esta etapa cuantifica la señal en valores binarios discretos (0-1023) para su análisis algorítmico y visualización en Processing.</p>
+        </div>
+        <div class="info-card">
+            <h3>Comunicación Bus I2C (Pantalla OLED)</h3>
+            <p>La telemetría local se despliega transmitiendo tramas de datos digitales a la pantalla OLED mediante el protocolo de comunicación serie síncrono I2C. A través de las líneas SDA (datos) y SCL (reloj), el microcontrolador renderiza información visual de forma paralela a la interfaz principal en PC.</p>
+        </div>
+    </div>
+</section>
+
+        <section class="components-section reveal">
+            <h2 class="center-title">Arquitectura del Hardware</h2>
+            
+            <div class="store-notice" style="text-align: center">
+                <strong>¿Dónde conseguir las piezas?</strong> 
+                Todos los componentes pueden ser adquiridos en tiendas de electrónica locales como <br>
+               <a href="https://laelectronica.com.gt/" target="_blank"><span class="highlight-store">La Electrónica</span></a> 
+                <a href="https://tienda.tettsa.gt/" target="_blank"><span class="highlight-store">Electrónica Tetsa</span></a>.
+				<p></p>
+				<strong>Parte téorica del proyecto.</strong> 
+                Descarga el pdf con la información importante de los componentes electrónicos utilizados en este proyecto de Arduino.<br>
+               <a href="img/teoria.pdf" target="_blank"><span class="highlight-store">PDF</span></a> 
+            </div>
+
+            <div class="grid-container">
+                <div class="card reveal">
+                    <div class="img-container">
+                        <img src="UNO-R3.jpg" alt="Arduino UNO" onerror="this.src='img/UNO-R3.jpg'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Arduino UNO R3</h3>
+                        <p>Microcontrolador ATmega328P. Gestiona interrupciones, lógica de estados e I/O digitales.</p>
+                    </div>
+                </div>
+				<div class="card reveal">
+                    <div class="img-container">
+                        <img src="MQ-2.jpg" alt="Sensor HC-SR04" onerror="this.src='img/MQ-2.jpg'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Sensor MQ-2</h3>
+                        <p>El MQ-2 es sensible a GLP, i-butano, propano, metano, alcohol, hidrogeno y humo.</p>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <div class="img-container">
+                        <img src="HC-SR04.jpg" alt="Sensor HC-SR04" onerror="this.src='img/HC-SR04.jpg'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Sensor HC-SR04</h3>
+                        <p>Transductor acústico emisor y receptor de ondas de alta frecuencia para medir la distancia.</p>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <div class="img-container">
+                        <img src="SG901.jpg" alt="Servo SG90" onerror="this.src='img/SG901.jpg'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Servomotor SG90</h3>
+                        <p>Actuador electromecánico. Proveé el movimiento de 180 grados para el escaneo radial.</p>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <div class="img-container">
+                        <img src="oled0961.jpg" alt="Pantalla OLED" onerror="this.src='img/oled0961.jpg'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Pantalla OLED 0.96"</h3>
+                        <p>Display matriz SSD1306. Despliega telemetría local de distancias, ángulos y métricas.</p>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <div class="img-container">
+                        <img src="Semaforo_led.jpg" alt="Semáforo LED" onerror="this.src='img/Semaforo_led.jpg'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Módulo Semáforo LED</h3>
+                        <p>Reflejan visualmente la cantidad de objetos y la presencia estricta de intrusos en movimiento.</p>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <div class="img-container">
+                        <img src="Modulo-Buzzer.jpg" alt="Buzzer Pasivo" onerror="this.src='img/Modulo-Buzzer.jpg'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Zumbador Pasivo</h3>
+                        <p>Actuador acústico programado para la generación ininterrumpida de alarmas dinámicas.</p>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <div class="img-container">
+                        <img src="protoboard.jpeg" alt="Mini Protoboard" onerror="this.src='img/protoboard.jpeg'">
+
+                    </div>
+                    <div class="card-content">
+                        <h3>Protoboard</h3>
+                        <p>Placa electrónica que usaremos para el prototipado de circuitos y conexiones.</p>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <div class="img-container">
+                        <img src="Jumper-MxF.jpg" alt="Cables Jumpers" onerror="this.src='img/Jumper-MxF.jpg'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Cables Jumpers</h3>
+                        <p>Dispositivo que puede conectarse o desconectarse para cambiar los ajustes o configuración.</p>
+                    </div>
+                </div>
+				<div class="card reveal">
+                    <div class="img-container">
+                        <img src="Processing-Logo.jpg" alt="Cables Jumpers" onerror="this.src='img/Processing-Logo.jpg'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Software Processing</h3>
+                        <p>Software (IDE) y lenguaje de programación abierto enfocado en el diseño visual, la creación artística y las interfaces interactivas</p>
+                    </div>
+                </div>
+                <!--<div class="card reveal">
+                    <div class="img-container">
+                        <img src="bateria9v.jpg" alt="Batería 9V" onerror="this.src='img/bateria9v.jpg'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Batería 9V</h3>
+                        <p>Fuente de energía portátil, esencial para proyectos autónomos sin depender de una PC.</p>
+                    </div>
+                </div>
+				 <div class="card reveal">
+                    <div class="img-container">
+                        <img src="porta_bateria.jpg" alt="Batería 9V" onerror="this.src='img/porta_bateria.jpg'">
+                    </div>
+					<div class="card-content">
+                        <h3>Porta batería 9V </h3>
+                        <p>con switch on-off</p>
+                    </div>
+                </div>-->
+            </div>
+        </section>
+
+        <section class="box-panel gallery-section reveal">
+            <h2 class="center-title">Galería del Proyecto:</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                
+                <div class="carousel-track-wrapper">
+                    <div class="carousel-track" id="carouselTrack" style="align-content: center">
+						<div class="carousel-slide"><img src="diagrama.jpg" alt="Proyecto Terminado" onerror="this.src='img/diagrama.jpg'"></div>
+                       <!-- <div class="carousel-slide"><img src="a.jpg" alt="Proyecto Terminado" onerror="this.src='img/a.jpg'"></div>
+                        <div class="carousel-slide"><img src="b.jpg" alt="Proyecto Terminado" onerror="this.src='img/b.jpg'"></div>
+                        <div class="carousel-slide"><img src="c.jpg" alt="Proyecto Terminado" onerror="this.src='img/c.jpg'"></div> 
+                        <div class="carousel-slide"><img src="d.jpg" alt="Proyecto Terminado" onerror="this.src='img/d.jpg'"></div> 
+                        <div class="carousel-slide"><img src="e.jpg" alt="Proyecto Terminado" onerror="this.src='img/e.jpg'"></div>
+                        <div class="carousel-slide"><img src="f.jpg" alt="Proyecto Terminado" onerror="this.src='img/f.jpg'"></div> 
+                        <div class="carousel-slide"><img src="g.jpg" alt="Proyecto Terminado" onerror="this.src='img/g.jpg'"></div> 
+                        <div class="carousel-slide"><img src="h.jpg" alt="Proyecto Terminado" onerror="this.src='img/h.jpg'"></div> 
+                        <div class="carousel-slide"><img src="i.jpg" alt="Proyecto Terminado" onerror="this.src='img/i.jpg'"></div>
+                        <div class="carousel-slide"><img src="j.jpg" alt="Proyecto Terminado" onerror="this.src='img/j.jpg'"></div>
+						<div class="carousel-slide"><img src="k.jpg" alt="Proyecto Terminado" onerror="this.src='img/k.jpg'"></div>
+						<div class="carousel-slide"><img src="l.jpg" alt="Proyecto Terminado" onerror="this.src='img/l.jpg'"></div>
+						<div class="carousel-slide"><img src="m.jpg" alt="Proyecto Terminado" onerror="this.src='img/m.jpg'"></div>-->
+                    </div>
+                </div>
+
+                <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+		<center><img src="img/logo.png" width="100" height="100" alt="logo umg"></center>
+        <p>&copy; 2026 Juan Mejía. Sistema de detección y monitoreo de calidad del aire..</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
