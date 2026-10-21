@@ -1,6 +1,7 @@
-// Variable global para rastrear en qué imagen estamos
+// Variable global para rastrear en qué imagen estamos en la galería
 let currentSlide = 0;
 
+// Función para el carrusel principal (Galería)
 window.moveSlide = function(direction) {
     const track = document.getElementById('carouselTrack');
     const slides = document.querySelectorAll('.carousel-slide');
@@ -18,6 +19,19 @@ window.moveSlide = function(direction) {
 
     const moveAmount = currentSlide * -100;
     track.style.transform = `translateX(${moveAmount}%)`;
+};
+
+// Función para deslizar los carruseles móviles (Principios y Hardware)
+window.scrollContainer = function(containerId, direction) {
+    const container = document.getElementById(containerId);
+    if (container) {
+        // Desplaza el ancho de una tarjeta (aprox el 85% de la pantalla)
+        const scrollAmount = container.clientWidth * 0.85; 
+        container.scrollBy({
+            left: direction * scrollAmount,
+            behavior: 'smooth'
+        });
+    }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -46,12 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Deja de observar una vez animado
+                observer.unobserve(entry.target); 
             }
         });
     }, {
         root: null,
-        threshold: 0.15, // Se activa cuando el 15% del elemento es visible
+        threshold: 0.15, 
         rootMargin: "0px 0px -50px 0px"
     });
 
